@@ -1,7 +1,6 @@
 package com.azavyalov.rickandmorty.data.entities
 
 data class Character(
-    // TODO make as primary key
     val id: Int,
     val name: String,
     val status: String,
@@ -10,5 +9,6 @@ data class Character(
     val gender: String,
     val url: String,
     val image: String,
+    val episode: List<String>,
     val created: String
 )
