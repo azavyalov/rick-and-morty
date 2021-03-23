@@ -1,7 +1,7 @@
 package com.azavyalov.rickandmorty
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.azavyalov.rickandmorty.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

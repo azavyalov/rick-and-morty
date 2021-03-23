@@ -19,11 +19,12 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- TODO add fragment container -->
-    <FrameLayout
-        android:id="@+id/list_container"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_graph" />
 
 </LinearLayout>
