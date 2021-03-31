@@ -1,58 +1,43 @@
 package com.azavyalov.rickandmorty.ui.characters
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.azavyalov.rickandmorty.R
 import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.databinding.ItemCharacterBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.azavyalov.rickandmorty.ext.loadFromUrl
+import kotlinx.android.synthetic.main.item_character.view.*
 
-class CharactersAdapter(private val listener: CharactersItemListener): RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter(private val characters: ArrayList<Character>) :
+    RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
-    private val items = ArrayList<Character>()
-
-    fun setItems(items: List<Character>) {
-        this.items.clear()
-        this.items.addAll(items)
-
+    fun updateCharacters(items: List<Character>) {
+        this.characters.clear()
+        this.characters.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(parent.context)
+        return CharacterViewHolder(inflater.inflate(R.layout.item_character, parent, false))
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+        holder.view.detailsImage.loadFromUrl(characters[position].image)
+        holder.view.detailsName.text = characters[position].name
+        holder.view.detailsSpecies.text = characters[position].name
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
-
-
-    class CharacterViewHolder(
-        private val itemBinding: ItemCharacterBinding,
-        private val listener: CharactersItemListener
-    ) : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
-
-        private lateinit var character: Character
-
-        init {
-            itemBinding.root.setOnClickListener(this)
-        }
-
-        fun bind(item: Character) {
-            character = item
-            itemBinding.name.text = item.name
-            itemBinding.species.text = item.species
-            Glide.with(itemBinding.root)
-                .load(item.image)
-                .transform(CircleCrop())
-                .into(itemBinding.image)
-        }
-        override fun onClick(v: View?) {
-            listener.onCharacterClicked(character.id)
+        holder.view.setOnClickListener {
+            val characterId = characters[position].id
+            val action = CharactersFragmentDirections
+                .actionCharactersFragmentToCharacterDetailsFragment(characterId)
+            Navigation.findNavController(it).navigate(action)
         }
     }
+
+    override fun getItemCount(): Int = characters.size
+
+    class CharacterViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 }
