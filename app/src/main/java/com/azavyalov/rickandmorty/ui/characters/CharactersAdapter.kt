@@ -10,8 +10,9 @@ import com.azavyalov.rickandmorty.data.entities.Character
 import com.azavyalov.rickandmorty.ext.loadFromUrl
 import kotlinx.android.synthetic.main.item_character.view.*
 
-class CharactersAdapter(private val characters: ArrayList<Character>) :
-    RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+
+    private val characters: ArrayList<Character> = arrayListOf()
 
     fun updateCharacters(items: List<Character>) {
         this.characters.clear()
@@ -25,9 +26,10 @@ class CharactersAdapter(private val characters: ArrayList<Character>) :
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        /*holder.bind(characters[position])*/
         holder.view.detailsImage.loadFromUrl(characters[position].image)
         holder.view.detailsName.text = characters[position].name
-        holder.view.detailsSpecies.text = characters[position].name
+        holder.view.detailsSpecies.text = characters[position].species
 
         holder.view.setOnClickListener {
             val characterId = characters[position].id
@@ -39,5 +41,7 @@ class CharactersAdapter(private val characters: ArrayList<Character>) :
 
     override fun getItemCount(): Int = characters.size
 
-    class CharacterViewHolder(var view: View) : RecyclerView.ViewHolder(view)
+    class CharacterViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+
+    }
 }

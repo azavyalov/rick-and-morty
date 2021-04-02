@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface CharactersApi {
 
-    @GET("/character")
+    @GET("/api/character/")
     fun getCharacters(@Query("page") page: String): Single<CharactersResponse>
 
-    @GET("/character/{id}")
+    @GET("/api/character/{id}")
     fun getCharacterDetails(@Path("id") id: Int): Single<Character>
 }

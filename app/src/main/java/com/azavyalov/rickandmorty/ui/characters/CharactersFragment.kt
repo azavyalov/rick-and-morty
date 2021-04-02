@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.R
 import kotlinx.android.synthetic.main.fragment_characters.*
 
 class CharactersFragment : Fragment() {
 
     private lateinit var viewModel: CharactersViewModel
+    private lateinit var adapter: CharactersAdapter
+    private var availableToSearch: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,10 +33,34 @@ class CharactersFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
         viewModel.getCharacters()
 
-        val layoutManager = LinearLayoutManager(context)
-        rv_characters.layoutManager = layoutManager
+        setupRecycler()
+        setupObservers()
+    }
 
-        val characterAdapter = CharactersAdapter(arrayListOf())
-        // TODO
+    private fun setupRecycler() {
+        val layoutManager = LinearLayoutManager(context)
+        charactersRecycler.layoutManager = layoutManager
+
+        adapter = CharactersAdapter()
+        charactersRecycler.adapter = adapter
+
+        charactersRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (charactersRecycler.canScrollVertically(1)) {
+                    if (availableToSearch) {
+                        viewModel.searchNextPage()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setupObservers() {
+        viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
+            characters?.let {
+                characterError.visibility = View.GONE
+                adapter.updateCharacters(it)
+            }
+        })
     }
 }
