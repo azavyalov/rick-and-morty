@@ -16,17 +16,20 @@ class CharactersViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val characters = MutableLiveData<List<Character>>()
     val characterError = MutableLiveData<Boolean>()
-    val characterLoading = MutableLiveData<Boolean>()
+    val characterProgress = MutableLiveData<Boolean>()
     val isNextPageAvailable = MutableLiveData<Boolean>()
 
     private var pageNumber: Int = 1
 
     fun getCharacters() {
+        characterProgress.value = true
+
         disposable.add(charactersService.getCharacters("1")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
                 override fun onSuccess(response: CharactersResponse) {
+                    characterProgress.value = false
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = response.results
                     characterError.value = false
@@ -36,11 +39,9 @@ class CharactersViewModel : ViewModel() {
                 }
             })
         )
-
     }
 
     fun searchNextPage() {
-        characterLoading.value = true
         pageNumber += 1
 
         disposable.add(charactersService.getCharacters(pageNumber.toString())
@@ -50,7 +51,6 @@ class CharactersViewModel : ViewModel() {
                 override fun onSuccess(response: CharactersResponse) {
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = characters.value.orEmpty() + response.results
-                    characterLoading.value = false
                     characterError.value = false
                 }
                 override fun onError(e: Throwable) {
