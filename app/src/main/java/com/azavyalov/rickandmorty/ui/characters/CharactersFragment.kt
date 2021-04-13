@@ -57,10 +57,22 @@ class CharactersFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        observeProgress()
         observeCharacters()
         observeNextPage()
-        observeProgress()
         observeError()
+    }
+
+    private fun observeProgress() {
+        viewModel.characterProgress.observe(viewLifecycleOwner, Observer {
+            it.let {
+                if (it) {
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                }
+            }
+        })
     }
 
     private fun observeCharacters() {
@@ -75,18 +87,6 @@ class CharactersFragment : Fragment() {
         viewModel.isNextPageAvailable.observe(viewLifecycleOwner, Observer {
             it.let {
                 isAvailableToSearch = it
-            }
-        })
-    }
-
-    private fun observeProgress() {
-        viewModel.characterProgress.observe(viewLifecycleOwner, Observer {
-            it.let {
-                if (it) {
-                    progressBar.visibility = View.VISIBLE
-                } else {
-                    progressBar.visibility = View.GONE
-                }
             }
         })
     }

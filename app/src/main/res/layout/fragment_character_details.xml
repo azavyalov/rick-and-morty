@@ -42,6 +42,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            android:loadUrl="@{characterDetail.image}"
+            android:layout_margin="16dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@id/gln_middle"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,45 +54,49 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="28dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/gln_middle"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{characterDetail.name}"
             tools:text="Rick Sanchez" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/gln_middle"
             app:layout_constraintTop_toBottomOf="@id/name"
+            android:text="@{characterDetail.status}"
             tools:text="Alive" />
 
         <TextView
             android:id="@+id/species"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/gln_middle"
             app:layout_constraintTop_toBottomOf="@+id/status"
+            android:text="@{characterDetail.species}"
             tools:text="Human" />
 
         <TextView
             android:id="@+id/gender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/gln_middle"
             app:layout_constraintTop_toBottomOf="@+id/species"
+            android:text="@{characterDetail.gender}"
             tools:text="Male" />
 
         <TextView
@@ -102,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
-            tools:text="Episodes" />
+            android:text="Episodes" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/episodes_recycler"
