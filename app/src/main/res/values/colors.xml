@@ -5,7 +5,7 @@
     <color name="colorOnPrimary">@color/white</color>
 
     <color name="colorSecondary">#FF03DAC5</color>
-    <color name="colorSecondaryVariant">#FF018786</color>
+    <color name="colorSecondaryVariant">@color/white</color>
     <color name="colorOnSecondary">@color/black</color>
 
     <color name="purple_200">#FFBB86FC</color>
