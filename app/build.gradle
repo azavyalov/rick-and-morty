@@ -27,6 +27,18 @@ android {
         }
     }
 
+    flavorDimensions "rickandmorty"
+    productFlavors {
+        green {
+            dimension "rickandmorty"
+            applicationIdSuffix ".green"
+        }
+        orange {
+            dimension "rickandmorty"
+            applicationIdSuffix ".orange"
+        }
+    }
+
     buildFeatures {
         dataBinding true
         viewBinding true
