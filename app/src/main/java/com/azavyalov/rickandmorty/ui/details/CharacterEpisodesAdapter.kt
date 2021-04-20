@@ -35,6 +35,7 @@ class CharacterEpisodesAdapter :
         fun bind(item: Episode) {
             with(itemBinding) {
                 episodeName.text = item.name
+                episodeNumber.text = item.episode
             }
         }
     }
