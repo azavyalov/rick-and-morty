@@ -23,8 +23,4 @@ class CharactersRepository : ICharactersRepository {
     override fun getCharacterDetails(id: Int) : Single<Character> {
         return api.getCharacterDetails(id)
     }
-
-    override fun getEpisodesOfCharacter(episodeQuery: String): Single<EpisodeResponse> {
-        return api.getMultipleEpisodes(episodeQuery)
-    }
 }
