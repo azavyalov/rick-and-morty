@@ -31,7 +31,7 @@
             tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gln_middle"
+            android:id="@+id/glnMiddle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -45,7 +45,7 @@
             android:loadUrl="@{characterDetail.image}"
             android:layout_margin="16dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="@id/gln_middle"
+            app:layout_constraintEnd_toEndOf="@id/glnMiddle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -58,7 +58,7 @@
             android:layout_marginTop="28dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gln_middle"
+            app:layout_constraintStart_toEndOf="@id/glnMiddle"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{characterDetail.name}"
             tools:text="Rick Sanchez" />
@@ -70,7 +70,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gln_middle"
+            app:layout_constraintStart_toEndOf="@id/glnMiddle"
             app:layout_constraintTop_toBottomOf="@id/name"
             android:text="@{characterDetail.status}"
             tools:text="Alive" />
@@ -82,7 +82,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gln_middle"
+            app:layout_constraintStart_toEndOf="@id/glnMiddle"
             app:layout_constraintTop_toBottomOf="@+id/status"
             android:text="@{characterDetail.species}"
             tools:text="Human" />
@@ -94,13 +94,13 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gln_middle"
+            app:layout_constraintStart_toEndOf="@id/glnMiddle"
             app:layout_constraintTop_toBottomOf="@+id/species"
             android:text="@{characterDetail.gender}"
             tools:text="Male" />
 
         <TextView
-            android:id="@+id/episodes_title"
+            android:id="@+id/episodesTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -111,14 +111,14 @@
             android:text="Episodes" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/episodes_recycler"
+            android:id="@+id/episodesRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/episodes_title"
+            app:layout_constraintTop_toBottomOf="@id/episodesTitle"
             tools:listitem="@layout/item_episode" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

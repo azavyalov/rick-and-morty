@@ -1,6 +1,7 @@
 package com.azavyalov.rickandmorty.data.repository
 
 import com.azavyalov.rickandmorty.data.entities.Character
+import com.azavyalov.rickandmorty.data.entities.episode.EpisodeResponse
 import com.azavyalov.rickandmorty.data.remote.CharactersApi
 import com.azavyalov.rickandmorty.data.remote.CharactersResponse
 import com.azavyalov.rickandmorty.di.DaggerApiComponent
@@ -22,5 +23,9 @@ class CharactersRepository : ICharactersRepository {
 
     override fun getCharacterDetails(id: Int) : Single<Character> {
         return api.getCharacterDetails(id)
+    }
+
+    override fun getEpisodesOfCharacter(episodeQuery: String): Single<EpisodeResponse> {
+        return api.getMultipleEpisodes(episodeQuery)
     }
 }
