@@ -10,8 +10,7 @@ import javax.inject.Inject
 
 class CharactersRepository : ICharactersRepository {
 
-    @Inject
-    lateinit var api: CharactersApi
+    @Inject lateinit var api: CharactersApi
 
     init {
         DaggerApiComponent.create().inject(this)

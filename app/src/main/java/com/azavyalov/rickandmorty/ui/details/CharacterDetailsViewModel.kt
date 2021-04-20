@@ -15,9 +15,9 @@ class CharacterDetailsViewModel : ViewModel() {
     private val repository = CharactersRepository()
     private val disposable = CompositeDisposable()
     val details = MutableLiveData<Character>()
+    val episodes = MutableLiveData<EpisodeResponse>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
-    val episodes = MutableLiveData<EpisodeResponse>()
 
     fun getCharacterDetails(id: Int) {
         progress.value = true
@@ -47,7 +47,9 @@ class CharacterDetailsViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<EpisodeResponse>() {
                     override fun onSuccess(t: EpisodeResponse) {
+                        progress.value = false
                         episodes.value = t
+                        error.value = false
                     }
                     override fun onError(e: Throwable) {
                         error.value = true

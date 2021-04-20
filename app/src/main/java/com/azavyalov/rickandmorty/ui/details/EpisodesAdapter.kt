@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.data.entities.episode.Episode
 import com.azavyalov.rickandmorty.databinding.ItemEpisodeBinding
 
-class CharacterEpisodesAdapter :
-    RecyclerView.Adapter<CharacterEpisodesAdapter.EpisodeViewHolder>() {
+class EpisodesAdapter : RecyclerView.Adapter<EpisodesAdapter.EpisodeViewHolder>() {
 
     private val episodes: ArrayList<Episode> = arrayListOf()
 
