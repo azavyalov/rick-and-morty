@@ -1,7 +1,7 @@
 package com.azavyalov.rickandmorty.di
 
 import com.azavyalov.rickandmorty.data.remote.CharactersApi
-import com.azavyalov.rickandmorty.data.remote.CharactersService
+import com.azavyalov.rickandmorty.data.repository.CharactersRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -25,8 +25,8 @@ class ApiModule {
     }
 
     @Provides
-    fun provideCharacterService(): CharactersService {
-        return CharactersService()
+    fun provideCharacterRepository(): CharactersRepository {
+        return CharactersRepository()
     }
 
     private fun buildOkHttp(): OkHttpClient {
