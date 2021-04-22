@@ -15,27 +15,28 @@ class CharactersViewModel : ViewModel() {
     private val repository = CharactersRepository()
     private val disposable = CompositeDisposable()
     val characters = MutableLiveData<List<Character>>()
-    val characterError = MutableLiveData<Boolean>()
-    val characterProgress = MutableLiveData<Boolean>()
+    val error = MutableLiveData<Boolean>()
+    val charactersProgress = MutableLiveData<Boolean>()
+    val pagingProgress = MutableLiveData<Boolean>()
     val isNextPageAvailable = MutableLiveData<Boolean>()
 
     private var pageNumber: Int = 1
 
     fun getCharacters() {
-        characterProgress.value = true
+        charactersProgress.value = true
 
         disposable.add(repository.getCharacters("1")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
                 override fun onSuccess(response: CharactersResponse) {
-                    characterProgress.value = false
+                    error.value = false
+                    charactersProgress.value = false
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = response.results
-                    characterError.value = false
                 }
                 override fun onError(e: Throwable) {
-                    characterError.value = true
+                    error.value = true
                 }
             })
         )
@@ -43,18 +44,23 @@ class CharactersViewModel : ViewModel() {
 
     fun searchNextPage() {
         pageNumber += 1
+        pagingProgress.value = true
 
         disposable.add(repository.getCharacters(pageNumber.toString())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
                 override fun onSuccess(response: CharactersResponse) {
+                    error.value = false
+                    if (response.info.next == null) {
+                        pageNumber = 1
+                    }
                     isNextPageAvailable.value = response.info.next != null
+                    pagingProgress.value = false
                     characters.value = characters.value.orEmpty() + response.results
-                    characterError.value = false
                 }
                 override fun onError(e: Throwable) {
-                    characterError.value = true
+                    error.value = true
                 }
             })
         )
