@@ -1,7 +1,7 @@
 package com.azavyalov.rickandmorty.data.remote
 
 import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.entities.episode.EpisodeResponse
+import com.azavyalov.rickandmorty.data.entities.episode.Episode
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,5 +16,8 @@ interface CharactersApi {
     fun getCharacterDetails(@Path("id") id: Int): Single<Character>
 
     @GET("/api/episode/{episodes}")
-    fun getMultipleEpisodes(@Path("episodes") episodes: String): Single<EpisodeResponse>
+    fun getMultipleEpisodes(@Path("episodes") episodes: String): Single<ArrayList<Episode>>
+
+    @GET("/api/episode/{episode}")
+    fun getSingleEpisode(@Path("episode") episode: String): Single<Episode>
 }

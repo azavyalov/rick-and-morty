@@ -3,7 +3,7 @@ package com.azavyalov.rickandmorty.ui.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.entities.episode.EpisodeResponse
+import com.azavyalov.rickandmorty.data.entities.episode.Episode
 import com.azavyalov.rickandmorty.data.repository.CharactersRepository
 import com.azavyalov.rickandmorty.data.repository.EpisodesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +17,7 @@ class CharacterDetailsViewModel : ViewModel() {
     private val episodesRepository = EpisodesRepository()
     private val disposable = CompositeDisposable()
     val details = MutableLiveData<Character>()
-    val episodes = MutableLiveData<EpisodeResponse>()
+    val episodes = MutableLiveData<ArrayList<Episode>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
 
@@ -34,6 +34,7 @@ class CharacterDetailsViewModel : ViewModel() {
                         details.value = t
                         error.value = false
                     }
+
                     override fun onError(e: Throwable) {
                         error.value = true
                     }
@@ -43,20 +44,45 @@ class CharacterDetailsViewModel : ViewModel() {
 
     fun getEpisodesOfCharacter(episodeQuery: String) {
 
-        disposable.add(
-            episodesRepository.getEpisodesOfCharacter(episodeQuery)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<EpisodeResponse>() {
-                    override fun onSuccess(t: EpisodeResponse) {
-                        progress.value = false
-                        episodes.value = t
-                        error.value = false
-                    }
-                    override fun onError(e: Throwable) {
-                        error.value = true
-                    }
-                })
-        )
+        if (isMultipleEpisodes(episodeQuery)) {
+            disposable.add(
+                episodesRepository.getEpisodesOfCharacter(episodeQuery)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(object : DisposableSingleObserver<ArrayList<Episode>>() {
+                        override fun onSuccess(t: ArrayList<Episode>) {
+                            progress.value = false
+                            episodes.value = t
+                            error.value = false
+                        }
+
+                        override fun onError(e: Throwable) {
+                            error.value = true
+                        }
+                    })
+            )
+        } else {
+            disposable.add(
+                episodesRepository.getEpisodeOfCharacter(episodeQuery)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(object : DisposableSingleObserver<Episode>() {
+                        override fun onSuccess(t: Episode) {
+                            val episodeList = arrayListOf(t)
+                            progress.value = false
+                            episodes.value = episodeList
+                            error.value = false
+                        }
+
+                        override fun onError(e: Throwable) {
+                            error.value = true
+                        }
+                    })
+            )
+        }
+    }
+
+    private fun isMultipleEpisodes(value: String): Boolean {
+        return value.contains(",")
     }
 }
