@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.R
 import kotlinx.android.synthetic.main.fragment_characters.*
-import kotlinx.android.synthetic.main.fragment_characters.progressBar
+import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
 
 class CharactersFragment : Fragment() {
 
@@ -36,6 +35,7 @@ class CharactersFragment : Fragment() {
         viewModel.getCharacters()
 
         setupRecycler()
+        setupProgressObservers()
         setupObservers()
     }
 
@@ -47,7 +47,7 @@ class CharactersFragment : Fragment() {
         charactersRecycler.adapter = adapter
         charactersRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (charactersRecycler.canScrollVertically(1)) {
+                if (!charactersRecycler.canScrollVertically(1)) {
                     if (isAvailableToSearch) {
                         viewModel.searchNextPage()
                     }
@@ -56,27 +56,43 @@ class CharactersFragment : Fragment() {
         })
     }
 
+    private fun setupProgressObservers() {
+        observeCharactersProgress()
+        observePagingProgress()
+    }
+
     private fun setupObservers() {
-        observeProgress()
         observeCharacters()
         observeNextPage()
         observeError()
     }
 
-    private fun observeProgress() {
-        viewModel.characterProgress.observe(viewLifecycleOwner, Observer {
+    private fun observeCharactersProgress() {
+        viewModel.charactersProgress.observe(viewLifecycleOwner, {
             it.let {
                 if (it) {
-                    progressBar.visibility = View.VISIBLE
+                    charactersProgressBar.visibility = View.VISIBLE
                 } else {
-                    progressBar.visibility = View.GONE
+                    charactersProgressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+    private fun observePagingProgress() {
+        viewModel.pagingProgress.observe(viewLifecycleOwner, {
+            it.let {
+                if (it) {
+                    pagingProgressBar.visibility = View.VISIBLE
+                } else {
+                    pagingProgressBar.visibility = View.GONE
                 }
             }
         })
     }
 
     private fun observeCharacters() {
-        viewModel.characters.observe(viewLifecycleOwner, Observer { characters ->
+        viewModel.characters.observe(viewLifecycleOwner, { characters ->
             characters?.let {
                 adapter.updateCharacters(it)
             }
@@ -84,7 +100,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun observeNextPage() {
-        viewModel.isNextPageAvailable.observe(viewLifecycleOwner, Observer {
+        viewModel.isNextPageAvailable.observe(viewLifecycleOwner, {
             it.let {
                 isAvailableToSearch = it
             }
@@ -92,7 +108,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun observeError() {
-        viewModel.characterError.observe(viewLifecycleOwner, Observer {
+        viewModel.error.observe(viewLifecycleOwner, {
             it.let {
                 if (it) {
                     Toast.makeText(
