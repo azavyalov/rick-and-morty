@@ -22,16 +22,25 @@ class CharactersViewModel : ViewModel() {
 
     private var pageNumber: Int = 1
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
+
     fun getCharacters() {
-        charactersProgress.value = true
 
         disposable.add(repository.getCharacters("1")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                charactersProgress.value = true
+            }
+            .doFinally {
+                charactersProgress.value = false
+            }
             .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
                 override fun onSuccess(response: CharactersResponse) {
                     error.value = false
-                    charactersProgress.value = false
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = response.results
                 }
@@ -44,11 +53,16 @@ class CharactersViewModel : ViewModel() {
 
     fun searchNextPage() {
         pageNumber += 1
-        pagingProgress.value = true
 
         disposable.add(repository.getCharacters(pageNumber.toString())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                pagingProgress.value = true
+            }
+            .doFinally {
+                pagingProgress.value = false
+            }
             .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
                 override fun onSuccess(response: CharactersResponse) {
                     error.value = false
@@ -56,7 +70,6 @@ class CharactersViewModel : ViewModel() {
                         pageNumber = 1
                     }
                     isNextPageAvailable.value = response.info.next != null
-                    pagingProgress.value = false
                     characters.value = characters.value.orEmpty() + response.results
                 }
                 override fun onError(e: Throwable) {

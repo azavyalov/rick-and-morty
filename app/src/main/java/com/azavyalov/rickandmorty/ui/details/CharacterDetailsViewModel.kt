@@ -21,16 +21,25 @@ class CharacterDetailsViewModel : ViewModel() {
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
+
     fun getCharacterDetails(id: Int) {
-        progress.value = true
 
         disposable.add(
             charactersRepository.getCharacterDetails(id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    progress.value = true
+                }
+                .doFinally {
+                    progress.value = false
+                }
                 .subscribeWith(object : DisposableSingleObserver<Character>() {
                     override fun onSuccess(t: Character) {
-                        progress.value = false
                         details.value = t
                         error.value = false
                     }
@@ -49,9 +58,14 @@ class CharacterDetailsViewModel : ViewModel() {
                 episodesRepository.getEpisodesOfCharacter(episodeQuery)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        progress.value = true
+                    }
+                    .doFinally {
+                        progress.value = false
+                    }
                     .subscribeWith(object : DisposableSingleObserver<ArrayList<Episode>>() {
                         override fun onSuccess(t: ArrayList<Episode>) {
-                            progress.value = false
                             episodes.value = t
                             error.value = false
                         }
@@ -66,10 +80,15 @@ class CharacterDetailsViewModel : ViewModel() {
                 episodesRepository.getEpisodeOfCharacter(episodeQuery)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        progress.value = true
+                    }
+                    .doFinally {
+                        progress.value = false
+                    }
                     .subscribeWith(object : DisposableSingleObserver<Episode>() {
                         override fun onSuccess(t: Episode) {
                             val episodeList = arrayListOf(t)
-                            progress.value = false
                             episodes.value = episodeList
                             error.value = false
                         }
