@@ -2,10 +2,10 @@ package com.azavyalov.rickandmorty.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.entities.Episode
-import com.azavyalov.rickandmorty.data.repository.CharactersRepository
-import com.azavyalov.rickandmorty.data.repository.EpisodesRepository
+import com.azavyalov.data.models.CharacterDetails
+import com.azavyalov.data.models.Episode
+import com.azavyalov.data.repository.CharactersRepository
+import com.azavyalov.data.repository.EpisodesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -16,7 +16,7 @@ class CharacterDetailsViewModel : ViewModel() {
     private val charactersRepository = CharactersRepository()
     private val episodesRepository = EpisodesRepository()
     private val disposable = CompositeDisposable()
-    val details = MutableLiveData<Character>()
+    val details = MutableLiveData<CharacterDetails>()
     val episodes = MutableLiveData<ArrayList<Episode>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
@@ -38,8 +38,8 @@ class CharacterDetailsViewModel : ViewModel() {
                 .doFinally {
                     progress.value = false
                 }
-                .subscribeWith(object : DisposableSingleObserver<Character>() {
-                    override fun onSuccess(t: Character) {
+                .subscribeWith(object : DisposableSingleObserver<CharacterDetails>() {
+                    override fun onSuccess(t: CharacterDetails) {
                         details.value = t
                         error.value = false
                     }

@@ -96,4 +96,24 @@ ext {
             kaptDeps.daggerProcessor,
             kaptDeps.glideCompiler
     ]
+
+    dataImplDependencies = [
+            deps.kotlin,
+            deps.ktxX,
+
+            deps.rxJava,
+            deps.rxAndroid,
+
+            deps.retrofit,
+            deps.retrofitAdapterRx,
+            deps.retrofitConverterGson,
+            deps.retrofitLogging,
+
+            deps.dagger
+    ]
+
+    dataKaptDependencies = [
+            kaptDeps.daggerCompiler,
+            kaptDeps.daggerProcessor
+    ]
 }

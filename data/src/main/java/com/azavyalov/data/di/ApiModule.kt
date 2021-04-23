@@ -1,7 +1,7 @@
-package com.azavyalov.rickandmorty.di
+package com.azavyalov.data.di
 
-import com.azavyalov.rickandmorty.data.remote.CharactersApi
-import com.azavyalov.rickandmorty.data.repository.CharactersRepository
+import com.azavyalov.data.api.CharactersApi
+import com.azavyalov.data.repository.CharactersRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

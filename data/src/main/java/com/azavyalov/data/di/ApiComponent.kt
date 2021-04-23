@@ -1,7 +1,7 @@
-package com.azavyalov.rickandmorty.di
+package com.azavyalov.data.di
 
-import com.azavyalov.rickandmorty.data.repository.CharactersRepository
-import com.azavyalov.rickandmorty.data.repository.EpisodesRepository
+import com.azavyalov.data.repository.CharactersRepository
+import com.azavyalov.data.repository.EpisodesRepository
 import dagger.Component
 
 @Component(modules = [ApiModule::class])
