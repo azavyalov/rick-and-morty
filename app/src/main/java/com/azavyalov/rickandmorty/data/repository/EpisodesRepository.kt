@@ -1,6 +1,6 @@
 package com.azavyalov.rickandmorty.data.repository
 
-import com.azavyalov.rickandmorty.data.entities.episode.Episode
+import com.azavyalov.rickandmorty.data.entities.Episode
 import com.azavyalov.rickandmorty.data.remote.CharactersApi
 import com.azavyalov.rickandmorty.di.DaggerApiComponent
 import io.reactivex.Single
