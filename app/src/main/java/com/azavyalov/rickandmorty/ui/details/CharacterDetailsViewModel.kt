@@ -2,7 +2,7 @@ package com.azavyalov.rickandmorty.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Episode
 import com.azavyalov.data.repository.CharactersRepository
 import com.azavyalov.data.repository.EpisodesRepository
@@ -16,7 +16,7 @@ class CharacterDetailsViewModel : ViewModel() {
     private val charactersRepository = CharactersRepository()
     private val episodesRepository = EpisodesRepository()
     private val disposable = CompositeDisposable()
-    val details = MutableLiveData<Character>()
+    val details = MutableLiveData<CharacterDetails>()
     val episodes = MutableLiveData<ArrayList<Episode>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
@@ -38,8 +38,8 @@ class CharacterDetailsViewModel : ViewModel() {
                 .doFinally {
                     progress.value = false
                 }
-                .subscribeWith(object : DisposableSingleObserver<Character>() {
-                    override fun onSuccess(t: Character) {
+                .subscribeWith(object : DisposableSingleObserver<CharacterDetails>() {
+                    override fun onSuccess(t: CharacterDetails) {
                         details.value = t
                         error.value = false
                     }

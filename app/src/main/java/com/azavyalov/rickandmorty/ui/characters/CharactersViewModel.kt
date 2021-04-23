@@ -2,7 +2,7 @@ package com.azavyalov.rickandmorty.ui.characters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Characters
 import com.azavyalov.data.repository.CharactersRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,7 +14,7 @@ class CharactersViewModel : ViewModel() {
 
     private val repository = CharactersRepository()
     private val disposable = CompositeDisposable()
-    val characters = MutableLiveData<List<Character>>()
+    val characters = MutableLiveData<List<CharacterDetails>>()
     val error = MutableLiveData<Boolean>()
     val charactersProgress = MutableLiveData<Boolean>()
     val pagingProgress = MutableLiveData<Boolean>()

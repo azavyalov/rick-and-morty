@@ -2,7 +2,7 @@ package com.azavyalov.data.repository
 
 import com.azavyalov.data.api.CharactersApi
 import com.azavyalov.data.di.DaggerApiComponent
-import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Characters
 import io.reactivex.Single
 import javax.inject.Inject
@@ -20,7 +20,7 @@ class CharactersRepository : ICharactersRepository {
         return api.getCharacters(page)
     }
 
-    override fun getCharacterDetails(id: Int) : Single<Character> {
+    override fun getCharacterDetails(id: Int) : Single<CharacterDetails> {
         return api.getCharacterDetails(id)
     }
 }

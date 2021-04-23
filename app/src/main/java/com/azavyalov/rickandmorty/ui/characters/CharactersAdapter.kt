@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.rickandmorty.databinding.ItemCharacterBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
-    private val characters: ArrayList<Character> = arrayListOf()
+    private val characters: ArrayList<CharacterDetails> = arrayListOf()
 
-    fun updateCharacters(items: List<Character>) {
+    fun updateCharacters(items: List<CharacterDetails>) {
         this.characters.clear()
         this.characters.addAll(items)
         notifyDataSetChanged()
@@ -34,7 +34,7 @@ class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHo
     class CharacterViewHolder(private val itemBinding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(item: Character) {
+        fun bind(item: CharacterDetails) {
             with(itemBinding) {
                 itemName.text = item.name
                 itemSpecies.text = item.species
