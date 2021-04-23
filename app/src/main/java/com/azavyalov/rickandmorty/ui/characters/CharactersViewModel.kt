@@ -2,9 +2,9 @@ package com.azavyalov.rickandmorty.ui.characters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.remote.CharactersResponse
-import com.azavyalov.rickandmorty.data.repository.CharactersRepository
+import com.azavyalov.network.models.Character
+import com.azavyalov.network.models.Characters
+import com.azavyalov.network.repository.CharactersRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -38,8 +38,8 @@ class CharactersViewModel : ViewModel() {
             .doFinally {
                 charactersProgress.value = false
             }
-            .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
-                override fun onSuccess(response: CharactersResponse) {
+            .subscribeWith(object : DisposableSingleObserver<Characters>() {
+                override fun onSuccess(response: Characters) {
                     error.value = false
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = response.results
@@ -63,8 +63,8 @@ class CharactersViewModel : ViewModel() {
             .doFinally {
                 pagingProgress.value = false
             }
-            .subscribeWith(object : DisposableSingleObserver<CharactersResponse>() {
-                override fun onSuccess(response: CharactersResponse) {
+            .subscribeWith(object : DisposableSingleObserver<Characters>() {
+                override fun onSuccess(response: Characters) {
                     error.value = false
                     if (response.info.next == null) {
                         pageNumber = 1

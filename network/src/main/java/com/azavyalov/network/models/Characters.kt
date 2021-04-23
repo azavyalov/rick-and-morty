@@ -1,4 +1,4 @@
-package com.azavyalov.rickandmorty.data.entities
+package com.azavyalov.network.models
 
 data class Characters(
     val info: Info,

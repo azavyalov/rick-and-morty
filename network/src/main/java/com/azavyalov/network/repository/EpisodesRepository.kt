@@ -1,8 +1,8 @@
-package com.azavyalov.rickandmorty.data.repository
+package com.azavyalov.network.repository
 
-import com.azavyalov.rickandmorty.data.entities.Episode
-import com.azavyalov.rickandmorty.data.remote.CharactersApi
-import com.azavyalov.rickandmorty.di.DaggerApiComponent
+import com.azavyalov.network.api.CharactersApi
+import com.azavyalov.network.di.DaggerApiComponent
+import com.azavyalov.network.models.Episode
 import io.reactivex.Single
 import javax.inject.Inject
 

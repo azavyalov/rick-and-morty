@@ -8,7 +8,7 @@
 
         <variable
             name="characterDetail"
-            type="com.azavyalov.rickandmorty.data.entities.Character"
+            type="com.azavyalov.network.models.Character"
             />
 
     </data>

@@ -3,7 +3,7 @@ package com.azavyalov.rickandmorty.ui.details
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.azavyalov.rickandmorty.data.entities.Episode
+import com.azavyalov.network.models.Episode
 import com.azavyalov.rickandmorty.databinding.ItemEpisodeBinding
 
 class EpisodesAdapter : RecyclerView.Adapter<EpisodesAdapter.EpisodeViewHolder>() {
