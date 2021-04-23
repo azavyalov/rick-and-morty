@@ -1,6 +1,6 @@
 package com.azavyalov.rickandmorty.data.repository
 
-import com.azavyalov.rickandmorty.data.entities.episode.Episode
+import com.azavyalov.rickandmorty.data.entities.Episode
 import io.reactivex.Single
 
 interface IEpisodesRepository {

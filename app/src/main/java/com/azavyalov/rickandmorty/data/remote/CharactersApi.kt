@@ -1,7 +1,7 @@
 package com.azavyalov.rickandmorty.data.remote
 
 import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.entities.episode.Episode
+import com.azavyalov.rickandmorty.data.entities.Episode
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

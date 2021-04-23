@@ -1,4 +1,4 @@
-package com.azavyalov.rickandmorty.data.entities.episode
+package com.azavyalov.rickandmorty.data.entities
 
 import com.google.gson.annotations.SerializedName
 

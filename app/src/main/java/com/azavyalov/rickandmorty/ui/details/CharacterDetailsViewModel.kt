@@ -3,7 +3,7 @@ package com.azavyalov.rickandmorty.ui.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.azavyalov.rickandmorty.data.entities.Character
-import com.azavyalov.rickandmorty.data.entities.episode.Episode
+import com.azavyalov.rickandmorty.data.entities.Episode
 import com.azavyalov.rickandmorty.data.repository.CharactersRepository
 import com.azavyalov.rickandmorty.data.repository.EpisodesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
