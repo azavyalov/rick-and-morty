@@ -56,7 +56,7 @@ android {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':network')
+    implementation project(':data')
     implementation appImplDependencies
     kapt appKaptDependencies
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.azavyalov.network.models.Character
+import com.azavyalov.data.models.Character
 import com.azavyalov.rickandmorty.databinding.ItemCharacterBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop

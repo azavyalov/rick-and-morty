@@ -2,10 +2,10 @@ package com.azavyalov.rickandmorty.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.network.models.Character
-import com.azavyalov.network.models.Episode
-import com.azavyalov.network.repository.CharactersRepository
-import com.azavyalov.network.repository.EpisodesRepository
+import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.Episode
+import com.azavyalov.data.repository.CharactersRepository
+import com.azavyalov.data.repository.EpisodesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver

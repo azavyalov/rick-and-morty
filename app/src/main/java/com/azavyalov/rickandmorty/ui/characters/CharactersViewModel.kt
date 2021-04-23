@@ -2,9 +2,9 @@ package com.azavyalov.rickandmorty.ui.characters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.network.models.Character
-import com.azavyalov.network.models.Characters
-import com.azavyalov.network.repository.CharactersRepository
+import com.azavyalov.data.models.Character
+import com.azavyalov.data.models.Characters
+import com.azavyalov.data.repository.CharactersRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
