@@ -35,9 +35,6 @@ class CharacterDetailsViewModel : ViewModel() {
                 .doOnSubscribe {
                     progress.value = true
                 }
-                .doFinally {
-                    progress.value = false
-                }
                 .subscribeWith(object : DisposableSingleObserver<CharacterDetails>() {
                     override fun onSuccess(t: CharacterDetails) {
                         details.value = t

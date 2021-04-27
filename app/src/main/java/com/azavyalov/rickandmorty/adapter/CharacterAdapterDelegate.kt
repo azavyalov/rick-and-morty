@@ -1,41 +1,36 @@
-package com.azavyalov.rickandmorty.ui.characters
+package com.azavyalov.rickandmorty.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.data.models.CharacterDetails
+import com.azavyalov.data.models.DelegateAdapterItem
 import com.azavyalov.rickandmorty.databinding.ItemCharacterBinding
+import com.azavyalov.rickandmorty.ui.characters.CharactersFragmentDirections
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 
-class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharacterAdapterDelegate :
+    AbsListItemAdapterDelegate<CharacterDetails, DelegateAdapterItem, CharacterAdapterDelegate.CharacterViewHolder>() {
 
-    private val characters: ArrayList<CharacterDetails> = arrayListOf()
+    override fun isForViewType(item: DelegateAdapterItem, items: MutableList<DelegateAdapterItem>, position: Int): Boolean =
+        item is CharacterDetails
 
-    fun updateCharacters(items: List<CharacterDetails>) {
-        this.characters.clear()
-        this.characters.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): CharacterViewHolder {
         val binding: ItemCharacterBinding =
             ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CharacterViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(characters[position])
+    override fun onBindViewHolder(item: CharacterDetails, holder: CharacterViewHolder, payloads: MutableList<Any>) {
+        holder.bind(item)
     }
 
-    override fun getItemCount(): Int = characters.size
-
-    /** ViewHolder элемента списка */
-    class CharacterViewHolder(private val itemBinding: ItemCharacterBinding) :
+    inner class CharacterViewHolder(private val itemBinding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-        /** Биндит элемент на его разметку */
         fun bind(item: CharacterDetails) {
             with(itemBinding) {
                 itemName.text = item.name
@@ -52,5 +47,6 @@ class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHo
                 }
             }
         }
+
     }
 }

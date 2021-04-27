@@ -11,4 +11,9 @@ data class CharacterDetails(
     val image: String,
     val episode: List<String>,
     val created: String
-)
+) : DelegateAdapterItem {
+
+    override fun id() = id
+
+    override fun content() = hashCode()
+}
