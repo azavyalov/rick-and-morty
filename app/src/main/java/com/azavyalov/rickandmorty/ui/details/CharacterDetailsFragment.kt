@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.azavyalov.rickandmorty.R
+import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
 import com.azavyalov.rickandmorty.databinding.FragmentCharacterDetailsBinding
 import com.azavyalov.rickandmorty.util.FormatUtils
 import kotlinx.android.synthetic.main.fragment_character_details.*
@@ -17,9 +18,14 @@ import kotlinx.android.synthetic.main.fragment_character_details.*
 class CharacterDetailsFragment : Fragment() {
 
     private lateinit var viewModel: CharacterDetailsViewModel
-    private lateinit var adapter: EpisodesAdapter
     private lateinit var characterDetailsBinding: FragmentCharacterDetailsBinding
     private var characterId = 0
+
+    private val adapter: DiffUtilDelegatesAdapter by lazy {
+        DiffUtilDelegatesAdapter.Builder()
+            .add(EpisodeAdapterDelegate())
+            .build()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +54,6 @@ class CharacterDetailsFragment : Fragment() {
     private fun setupRecycler() {
         val layoutManager = LinearLayoutManager(context)
         episodesRecycler.layoutManager = layoutManager
-        adapter = EpisodesAdapter()
         episodesRecycler.adapter = adapter
     }
 
@@ -98,7 +103,7 @@ class CharacterDetailsFragment : Fragment() {
         viewModel.getEpisodesOfCharacter(episodeQuery)
         viewModel.episodes.observe(viewLifecycleOwner, { episodes ->
             episodes?.let {
-                adapter.updateEpisodes(episodes)
+                adapter.items = it
             }
         })
     }

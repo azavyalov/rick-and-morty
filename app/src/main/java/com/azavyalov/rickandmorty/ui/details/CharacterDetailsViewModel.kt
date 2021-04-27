@@ -17,7 +17,7 @@ class CharacterDetailsViewModel : ViewModel() {
     private val episodesRepository = EpisodesRepository()
     private val disposable = CompositeDisposable()
     val details = MutableLiveData<CharacterDetails>()
-    val episodes = MutableLiveData<ArrayList<Episode>>()
+    val episodes = MutableLiveData<List<Episode>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
 

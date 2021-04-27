@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.R
-import com.azavyalov.rickandmorty.adapter.CharacterAdapterDelegate
 import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
@@ -99,7 +98,6 @@ class CharactersFragment : Fragment() {
     private fun observeCharacters() {
         viewModel.characters.observe(viewLifecycleOwner, { characters ->
             characters?.let {
-                /*adapter.updateCharacters(it)*/
                 adapter.items = it
             }
         })
