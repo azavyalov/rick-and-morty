@@ -17,4 +17,5 @@ data class CharacterListAdapterItem(
 
     override fun id() = id
 
-    override fun content() = hashCode()}
+    override fun content() = hashCode()
+}

@@ -2,7 +2,6 @@ package com.azavyalov.rickandmorty.ui.characters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Characters
 import com.azavyalov.data.repository.CharactersRepository
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItem

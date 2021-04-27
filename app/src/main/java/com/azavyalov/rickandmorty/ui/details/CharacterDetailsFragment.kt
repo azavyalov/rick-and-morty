@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.azavyalov.rickandmorty.R
 import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
 import com.azavyalov.rickandmorty.databinding.FragmentCharacterDetailsBinding
+import com.azavyalov.rickandmorty.ui.details.adapter.EpisodeAdapterDelegate
 import com.azavyalov.rickandmorty.util.FormatUtils
 import kotlinx.android.synthetic.main.fragment_character_details.*
 
