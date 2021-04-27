@@ -8,7 +8,7 @@
 
         <variable
             name="characterDetail"
-            type="com.azavyalov.data.models.CharacterDetails"
+            type="com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItem"
             />
 
     </data>

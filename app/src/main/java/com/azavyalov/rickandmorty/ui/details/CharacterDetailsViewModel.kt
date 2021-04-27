@@ -2,10 +2,12 @@ package com.azavyalov.rickandmorty.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.azavyalov.data.models.CharacterDetails
-import com.azavyalov.data.models.Episode
 import com.azavyalov.data.repository.CharactersRepository
 import com.azavyalov.data.repository.EpisodesRepository
+import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItem
+import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItemMapper
+import com.azavyalov.rickandmorty.ui.details.adapter.EpisodeListAdapterItem
+import com.azavyalov.rickandmorty.ui.details.adapter.EpisodeListAdapterItemMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -16,8 +18,8 @@ class CharacterDetailsViewModel : ViewModel() {
     private val charactersRepository = CharactersRepository()
     private val episodesRepository = EpisodesRepository()
     private val disposable = CompositeDisposable()
-    val details = MutableLiveData<CharacterDetails>()
-    val episodes = MutableLiveData<ArrayList<Episode>>()
+    val details = MutableLiveData<CharacterListAdapterItem>()
+    val episodes = MutableLiveData<List<EpisodeListAdapterItem>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
 
@@ -30,16 +32,14 @@ class CharacterDetailsViewModel : ViewModel() {
 
         disposable.add(
             charactersRepository.getCharacterDetails(id)
+                .map(CharacterListAdapterItemMapper::map)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     progress.value = true
                 }
-                .doFinally {
-                    progress.value = false
-                }
-                .subscribeWith(object : DisposableSingleObserver<CharacterDetails>() {
-                    override fun onSuccess(t: CharacterDetails) {
+                .subscribeWith(object : DisposableSingleObserver<CharacterListAdapterItem>() {
+                    override fun onSuccess(t: CharacterListAdapterItem) {
                         details.value = t
                         error.value = false
                     }
@@ -56,6 +56,7 @@ class CharacterDetailsViewModel : ViewModel() {
         if (isMultipleEpisodes(episodeQuery)) {
             disposable.add(
                 episodesRepository.getEpisodesOfCharacter(episodeQuery)
+                    .map(EpisodeListAdapterItemMapper::map)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe {
@@ -64,8 +65,8 @@ class CharacterDetailsViewModel : ViewModel() {
                     .doFinally {
                         progress.value = false
                     }
-                    .subscribeWith(object : DisposableSingleObserver<ArrayList<Episode>>() {
-                        override fun onSuccess(t: ArrayList<Episode>) {
+                    .subscribeWith(object : DisposableSingleObserver<List<EpisodeListAdapterItem>>() {
+                        override fun onSuccess(t: List<EpisodeListAdapterItem>) {
                             episodes.value = t
                             error.value = false
                         }
@@ -78,6 +79,7 @@ class CharacterDetailsViewModel : ViewModel() {
         } else {
             disposable.add(
                 episodesRepository.getEpisodeOfCharacter(episodeQuery)
+                    .map(EpisodeListAdapterItemMapper::map)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe {
@@ -86,8 +88,8 @@ class CharacterDetailsViewModel : ViewModel() {
                     .doFinally {
                         progress.value = false
                     }
-                    .subscribeWith(object : DisposableSingleObserver<Episode>() {
-                        override fun onSuccess(t: Episode) {
+                    .subscribeWith(object : DisposableSingleObserver<EpisodeListAdapterItem>() {
+                        override fun onSuccess(t: EpisodeListAdapterItem) {
                             val episodeList = arrayListOf(t)
                             episodes.value = episodeList
                             error.value = false

@@ -11,4 +11,5 @@ data class Episode(
     val characters: List<String>,
     val url: String,
     val created: String
+
 )

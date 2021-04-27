@@ -10,14 +10,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.R
+import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
+import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterAdapterDelegate
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
 
 class CharactersFragment : Fragment() {
 
     private lateinit var viewModel: CharactersViewModel
-    private lateinit var adapter: CharactersAdapter
     private var isAvailableToSearch: Boolean = false
+
+    private val adapter: DiffUtilDelegatesAdapter by lazy {
+        DiffUtilDelegatesAdapter.Builder()
+            .add(CharacterAdapterDelegate())
+            .build()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +49,6 @@ class CharactersFragment : Fragment() {
     private fun setupRecycler() {
         val layoutManager = LinearLayoutManager(context)
         charactersRecycler.layoutManager = layoutManager
-
-        adapter = CharactersAdapter()
         charactersRecycler.adapter = adapter
         charactersRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -94,7 +99,7 @@ class CharactersFragment : Fragment() {
     private fun observeCharacters() {
         viewModel.characters.observe(viewLifecycleOwner, { characters ->
             characters?.let {
-                adapter.updateCharacters(it)
+                adapter.items = it
             }
         })
     }

@@ -23,6 +23,8 @@ ext {
 
     glideVersion = '4.11.0'
 
+    adapterDelegatesVersion = '4.3.0'
+
     junitVersion = '4.+'
     junitExtVersion = '1.1.2'
     espressoVersion = '3.3.0'
@@ -51,6 +53,8 @@ ext {
 
             navigationFragmentX  : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
             navigationUiX        : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+
+            adapterDelegates     : "com.hannesdorfmann:adapterdelegates4:$adapterDelegatesVersion",
 
             glide                : "com.github.bumptech.glide:glide:$glideVersion"
     ]
@@ -86,6 +90,8 @@ ext {
 
             deps.navigationFragmentX,
             deps.navigationUiX,
+
+            deps.adapterDelegates,
 
             deps.glide
     ]
