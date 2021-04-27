@@ -1,7 +1,6 @@
 package com.azavyalov.rickandmorty.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.azavyalov.data.models.DelegateAdapterItem
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 

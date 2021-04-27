@@ -1,4 +1,4 @@
-package com.azavyalov.data.models
+package com.azavyalov.rickandmorty.adapter
 
 interface DelegateAdapterItem {
 

@@ -11,9 +11,5 @@ data class Episode(
     val characters: List<String>,
     val url: String,
     val created: String
-) : DelegateAdapterItem {
 
-    override fun id() = id
-
-    override fun content() = hashCode()
-}
+)

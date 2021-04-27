@@ -3,7 +3,7 @@ package com.azavyalov.rickandmorty.ui.details.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.azavyalov.data.models.DelegateAdapterItem
+import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 import com.azavyalov.rickandmorty.databinding.ItemEpisodeBinding
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 

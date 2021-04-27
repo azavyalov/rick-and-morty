@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.azavyalov.data.models.DelegateAdapterItem
+import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 import com.azavyalov.rickandmorty.databinding.ItemCharacterBinding
 import com.azavyalov.rickandmorty.ui.characters.CharactersFragmentDirections
 import com.bumptech.glide.Glide

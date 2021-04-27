@@ -1,6 +1,6 @@
 package com.azavyalov.rickandmorty.ui.characters.adapter
 
-import com.azavyalov.data.models.DelegateAdapterItem
+import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 
 data class CharacterListAdapterItem(
     val id: Int,

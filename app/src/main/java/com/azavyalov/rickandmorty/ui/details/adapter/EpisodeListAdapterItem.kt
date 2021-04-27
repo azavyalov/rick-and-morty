@@ -1,6 +1,6 @@
 package com.azavyalov.rickandmorty.ui.details.adapter
 
-import com.azavyalov.data.models.DelegateAdapterItem
+import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 
 data class EpisodeListAdapterItem(
     val id: Int,
