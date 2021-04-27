@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.azavyalov.rickandmorty.R
 import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
+import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterAdapterDelegate
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
 
