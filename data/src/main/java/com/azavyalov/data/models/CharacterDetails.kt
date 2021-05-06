@@ -1,6 +1,11 @@
 package com.azavyalov.data.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "characters")
 data class CharacterDetails(
+    @PrimaryKey
     val id: Int,
     val name: String,
     val status: String,

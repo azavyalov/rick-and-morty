@@ -115,7 +115,10 @@ ext {
             deps.retrofitConverterGson,
             deps.retrofitLogging,
 
-            deps.dagger
+            deps.dagger,
+
+            deps.room,
+            deps.roomRx
     ]
 
     dataKaptDependencies = [
