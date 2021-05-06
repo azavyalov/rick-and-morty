@@ -15,10 +15,11 @@ import com.azavyalov.rickandmorty.databinding.FragmentCharacterDetailsBinding
 import com.azavyalov.rickandmorty.ui.details.adapter.EpisodeAdapterDelegate
 import com.azavyalov.rickandmorty.util.FormatUtils
 import kotlinx.android.synthetic.main.fragment_character_details.*
+import javax.inject.Inject
 
 class CharacterDetailsFragment : Fragment() {
 
-    private lateinit var viewModel: CharacterDetailsViewModel
+    @Inject lateinit var viewModel: CharacterDetailsViewModel
     private lateinit var characterDetailsBinding: FragmentCharacterDetailsBinding
     private var characterId = 0
 
