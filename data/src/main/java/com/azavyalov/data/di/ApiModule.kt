@@ -24,11 +24,6 @@ class ApiModule {
             .create(CharactersApi::class.java)
     }
 
-    @Provides
-    fun provideCharacterRepository(): CharactersRepository {
-        return CharactersRepository()
-    }
-
     private fun buildOkHttp(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.apply {

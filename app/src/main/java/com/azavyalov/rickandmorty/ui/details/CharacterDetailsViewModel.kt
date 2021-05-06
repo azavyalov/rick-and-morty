@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.azavyalov.data.repository.CharactersRepository
 import com.azavyalov.data.repository.EpisodesRepository
+import com.azavyalov.rickandmorty.di.DaggerAppComponent
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItem
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItemMapper
 import com.azavyalov.rickandmorty.ui.details.adapter.EpisodeListAdapterItem
@@ -12,16 +13,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class CharacterDetailsViewModel : ViewModel() {
 
-    private val charactersRepository = CharactersRepository()
-    private val episodesRepository = EpisodesRepository()
+    @Inject lateinit var charactersRepository: CharactersRepository
+    @Inject lateinit var episodesRepository: EpisodesRepository
     private val disposable = CompositeDisposable()
     val details = MutableLiveData<CharacterListAdapterItem>()
     val episodes = MutableLiveData<List<EpisodeListAdapterItem>>()
     val error = MutableLiveData<Boolean>()
     val progress = MutableLiveData<Boolean>()
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     override fun onCleared() {
         super.onCleared()
