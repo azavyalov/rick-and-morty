@@ -14,10 +14,11 @@ import com.azavyalov.rickandmorty.adapter.DiffUtilDelegatesAdapter
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterAdapterDelegate
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
+import javax.inject.Inject
 
 class CharactersFragment : Fragment() {
 
-    private lateinit var viewModel: CharactersViewModel
+    @Inject lateinit var viewModel: CharactersViewModel
     private var isAvailableToSearch: Boolean = false
 
     private val adapter: DiffUtilDelegatesAdapter by lazy {

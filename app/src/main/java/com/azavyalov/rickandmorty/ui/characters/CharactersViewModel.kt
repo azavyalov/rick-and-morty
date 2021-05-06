@@ -4,16 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.azavyalov.data.models.Characters
 import com.azavyalov.data.repository.CharactersRepository
+import com.azavyalov.rickandmorty.di.DaggerAppComponent
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItem
 import com.azavyalov.rickandmorty.ui.characters.adapter.CharacterListAdapterItemMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class CharactersViewModel : ViewModel() {
 
-    private val repository = CharactersRepository()
+    @Inject lateinit var repository: CharactersRepository
     private val disposable = CompositeDisposable()
     val characters = MutableLiveData<List<CharacterListAdapterItem>>()
     val error = MutableLiveData<Boolean>()
@@ -22,6 +24,10 @@ class CharactersViewModel : ViewModel() {
     val isNextPageAvailable = MutableLiveData<Boolean>()
 
     private var pageNumber: Int = 1
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     override fun onCleared() {
         super.onCleared()
