@@ -5,9 +5,9 @@ import com.azavyalov.data.repository.EpisodesRepository
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [ApiModule::class])
+@Component(modules = [ApiModule::class, RoomModule::class])
 @Singleton
-interface ApiComponent {
+interface DataComponent {
 
     fun inject(repository: CharactersRepository)
 

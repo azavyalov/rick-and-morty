@@ -1,7 +1,7 @@
 package com.azavyalov.data.repository
 
 import com.azavyalov.data.api.CharactersApi
-import com.azavyalov.data.di.DaggerApiComponent
+import com.azavyalov.data.di.DaggerDataComponent
 import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Characters
 import io.reactivex.Single
@@ -13,7 +13,7 @@ class CharactersRepository : ICharactersRepository {
     lateinit var api: CharactersApi
 
     init {
-        DaggerApiComponent.create().inject(this)
+        DaggerDataComponent.create().inject(this)
     }
 
     override fun getCharacters(page: String): Single<Characters> {
