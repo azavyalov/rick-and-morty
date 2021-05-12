@@ -1,7 +1,6 @@
 package com.azavyalov.data.di
 
 import com.azavyalov.data.api.CharactersApi
-import com.azavyalov.data.repository.CharactersRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -1,6 +1,7 @@
 package com.azavyalov.data.repository
 
 import com.azavyalov.data.api.CharactersApi
+import com.azavyalov.data.database.CharactersDao
 import com.azavyalov.data.di.DaggerDataComponent
 import com.azavyalov.data.models.CharacterDetails
 import com.azavyalov.data.models.Characters
@@ -11,6 +12,8 @@ class CharactersRepository : ICharactersRepository {
 
     @Inject
     lateinit var api: CharactersApi
+    /*@Inject
+    lateinit var dao: CharactersDao*/
 
     init {
         DaggerDataComponent.create().inject(this)
@@ -23,4 +26,8 @@ class CharactersRepository : ICharactersRepository {
     override fun getCharacterDetails(id: Int) : Single<CharacterDetails> {
         return api.getCharacterDetails(id)
     }
+
+    /*fun saveCharactersToDb(characters: List<CharacterDetails>) {
+        dao.insertAll(characters)
+    }*/
 }
