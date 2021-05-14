@@ -7,6 +7,7 @@ import com.azavyalov.rickandmorty.ui.details.CharacterDetailsViewModel
 import dagger.Module
 import dagger.Provides
 
+/** Модуль приложения */
 @Module
 class AppModule {
 

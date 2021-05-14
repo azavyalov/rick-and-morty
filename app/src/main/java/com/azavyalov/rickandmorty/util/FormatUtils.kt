@@ -3,10 +3,10 @@ package com.azavyalov.rickandmorty.util
 object FormatUtils {
 
     /**
-     * Преобразует ссылки из списка эпизодов в список номеров
+     * Преобразует список ссылок в строку со списком номеров (эпизодов)
      * Пример: https://rickandmortyapi.com/api/episode/27, https://rickandmortyapi.com/api/episode/28  -> 27, 28
      * @param episodeList список ссылок на эпизоды
-     * @return список номеров эпизода
+     * @return строка со списком эпизодов
      */
     fun parseEpisodes(episodeList: List<String>): String {
         var episodes = ""

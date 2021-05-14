@@ -7,6 +7,7 @@ import com.azavyalov.data.models.Characters
 import io.reactivex.Single
 import javax.inject.Inject
 
+/** Репозиторий получения данных о персонажах */
 class CharactersRepository : ICharactersRepository {
 
     @Inject

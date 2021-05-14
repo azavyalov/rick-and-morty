@@ -2,6 +2,7 @@ package com.azavyalov.data.models
 
 import com.google.gson.annotations.SerializedName
 
+/** Модель информации об эпизодах */
 data class Episode(
     val id: Int,
     val name: String,

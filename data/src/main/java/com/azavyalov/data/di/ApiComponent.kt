@@ -5,6 +5,7 @@ import com.azavyalov.data.repository.EpisodesRepository
 import dagger.Component
 import javax.inject.Singleton
 
+/** API компонет */
 @Component(modules = [ApiModule::class])
 @Singleton
 interface ApiComponent {

@@ -6,6 +6,7 @@ import com.azavyalov.rickandmorty.ui.details.CharacterDetailsFragment
 import com.azavyalov.rickandmorty.ui.details.CharacterDetailsViewModel
 import dagger.Component
 
+/** App компонент */
 @Component(modules = [AppModule::class])
 interface AppComponent {
 

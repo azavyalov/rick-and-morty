@@ -15,6 +15,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/** Вью модель списка персонажей */
 class CharacterDetailsViewModel : ViewModel() {
 
     @Inject lateinit var charactersRepository: CharactersRepository

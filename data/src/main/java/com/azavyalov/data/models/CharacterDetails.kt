@@ -1,5 +1,6 @@
 package com.azavyalov.data.models
 
+/** Модель информации о деталях персонажа */
 data class CharacterDetails(
     val id: Int,
     val name: String,

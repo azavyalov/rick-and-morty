@@ -2,6 +2,7 @@ package com.azavyalov.rickandmorty.ui.details.adapter
 
 import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 
+/** Модель элемента делегат адаптера списка эпизодов */
 data class EpisodeListAdapterItem(
     val id: Int,
     val name: String,

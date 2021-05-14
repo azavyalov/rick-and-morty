@@ -6,6 +6,7 @@ import com.azavyalov.data.models.Episode
 import io.reactivex.Single
 import javax.inject.Inject
 
+/** Репозиторий получения данных об эпизодах */
 class EpisodesRepository : IEpisodesRepository {
 
     @Inject

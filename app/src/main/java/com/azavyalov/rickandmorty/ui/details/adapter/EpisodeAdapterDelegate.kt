@@ -7,6 +7,7 @@ import com.azavyalov.rickandmorty.adapter.DelegateAdapterItem
 import com.azavyalov.rickandmorty.databinding.ItemEpisodeBinding
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 
+/** Адаптер делегат списка эпизодов */
 class EpisodeAdapterDelegate :
     AbsListItemAdapterDelegate<EpisodeListAdapterItem, DelegateAdapterItem, EpisodeAdapterDelegate.EpisodeViewHolder>() {
 
@@ -23,9 +24,11 @@ class EpisodeAdapterDelegate :
         holder.bind(item)
     }
 
+    /** ViewHolder элемента из списка эпизодов */
     inner class EpisodeViewHolder(private val itemBinding: ItemEpisodeBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
+        /** Биндит элемент на его разметку */
         fun bind(item: EpisodeListAdapterItem) {
             with(itemBinding) {
                 episodeName.text = item.name

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_characters.charactersProgressBar
 import javax.inject.Inject
 
+/** Фрагмент экрана списка персонажей */
 class CharactersFragment : Fragment() {
 
     @Inject lateinit var viewModel: CharactersViewModel

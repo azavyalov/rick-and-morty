@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 
+/** Главный экран приложения */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

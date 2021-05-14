@@ -1,10 +1,10 @@
 package com.azavyalov.rickandmorty.ui.details.adapter
 
 import com.azavyalov.data.models.Episode
-import com.azavyalov.rickandmorty.util.mapper.AbstractListMapper
+import com.azavyalov.rickandmorty.mapper.AbstractListMapper
 
-object EpisodeListAdapterItemMapper :
-    AbstractListMapper<Episode, EpisodeListAdapterItem>() {
+/** Маппер информации об эпизоде в модель адаптера */
+object EpisodeListAdapterItemMapper : AbstractListMapper<Episode, EpisodeListAdapterItem>() {
 
     override fun map(from: Episode): EpisodeListAdapterItem {
         return EpisodeListAdapterItem(

@@ -13,6 +13,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/** Вью модель списка персонажей */
 class CharactersViewModel : ViewModel() {
 
     @Inject lateinit var repository: CharactersRepository
@@ -35,7 +36,6 @@ class CharactersViewModel : ViewModel() {
     }
 
     fun getCharacters() {
-
         disposable.add(repository.getCharacters("1")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())

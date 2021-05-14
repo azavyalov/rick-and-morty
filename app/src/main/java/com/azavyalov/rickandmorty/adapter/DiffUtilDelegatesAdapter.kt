@@ -4,6 +4,11 @@ import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
+/**
+ * Адаптер RecyclerView, работающий через делегаты элементов списка
+ * @param diffCallback коллбэк для подсчета различий между двумя списками
+ * @param delegates делегаты элементов списка
+ */
 open class DiffUtilDelegatesAdapter protected constructor(
     diffCallback: DiffUtil.ItemCallback<DelegateAdapterItem>,
     vararg delegates: AdapterDelegate<List<DelegateAdapterItem>>

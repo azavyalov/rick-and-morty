@@ -1,8 +1,9 @@
 package com.azavyalov.rickandmorty.ui.characters.adapter
 
 import com.azavyalov.data.models.CharacterDetails
-import com.azavyalov.rickandmorty.util.mapper.AbstractListMapper
+import com.azavyalov.rickandmorty.mapper.AbstractListMapper
 
+/** Маппер информации о деталях персонажа в модель адаптера*/
 object CharacterListAdapterItemMapper :
     AbstractListMapper<CharacterDetails, CharacterListAdapterItem>() {
 
