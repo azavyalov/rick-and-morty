@@ -28,6 +28,12 @@ class CharactersFragment : Fragment() {
             .build()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
+        viewModel.getCharacters()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,10 +45,6 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
-        viewModel.getCharacters()
-
         setupRecycler()
         setupProgressObservers()
         setupObservers()
