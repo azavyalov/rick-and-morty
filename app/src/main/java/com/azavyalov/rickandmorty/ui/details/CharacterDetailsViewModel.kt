@@ -35,8 +35,8 @@ class CharacterDetailsViewModel : ViewModel() {
         disposable.clear()
     }
 
+    /** Подписка на получение деталей персонажа по [id] */
     fun getCharacterDetails(id: Int) {
-
         disposable.add(
             charactersRepository.getCharacterDetails(id)
                 .map(CharacterListAdapterItemMapper::map)
@@ -58,8 +58,8 @@ class CharacterDetailsViewModel : ViewModel() {
         )
     }
 
+    /** Подписка на получение эпизодов персонажа по [episodeQuery] */
     fun getEpisodesOfCharacter(episodeQuery: String) {
-
         if (isMultipleEpisodes(episodeQuery)) {
             disposable.add(
                 episodesRepository.getEpisodesOfCharacter(episodeQuery)
@@ -110,6 +110,7 @@ class CharacterDetailsViewModel : ViewModel() {
         }
     }
 
+    /** Возвращает флаг наличия более одного эпизода у персонажа */
     private fun isMultipleEpisodes(value: String): Boolean {
         return value.contains(",")
     }

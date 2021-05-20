@@ -35,6 +35,7 @@ class CharactersViewModel : ViewModel() {
         disposable.clear()
     }
 
+    /** Подписка на получение первой порции персонажей */
     fun getCharacters() {
         disposable.add(repository.getCharacters(FIRST_PAGE.toString())
             .subscribeOn(Schedulers.newThread())
@@ -59,6 +60,7 @@ class CharactersViewModel : ViewModel() {
         )
     }
 
+    /** Подписка на получение персонажей постранично */
     fun searchNextPage() {
         incrementPage()
 
