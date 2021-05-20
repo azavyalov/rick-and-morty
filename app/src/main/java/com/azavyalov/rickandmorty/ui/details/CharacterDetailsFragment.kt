@@ -17,7 +17,7 @@ import com.azavyalov.rickandmorty.util.FormatUtils
 import kotlinx.android.synthetic.main.fragment_character_details.*
 import javax.inject.Inject
 
-/** Фрагмент экрана с детялями персонажа */
+/** Фрагмент экрана с деталями персонажа */
 class CharacterDetailsFragment : Fragment() {
 
     @Inject lateinit var viewModel: CharacterDetailsViewModel

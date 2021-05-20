@@ -35,8 +35,9 @@ class CharactersViewModel : ViewModel() {
         disposable.clear()
     }
 
+    /** Подписка на получение первой порции персонажей */
     fun getCharacters() {
-        disposable.add(repository.getCharacters("1")
+        disposable.add(repository.getCharacters(FIRST_PAGE.toString())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -59,8 +60,9 @@ class CharactersViewModel : ViewModel() {
         )
     }
 
+    /** Подписка на получение персонажей постранично */
     fun searchNextPage() {
-        pageNumber += 1
+        incrementPage()
 
         disposable.add(repository.getCharacters(pageNumber.toString())
             .subscribeOn(Schedulers.newThread())
@@ -75,7 +77,7 @@ class CharactersViewModel : ViewModel() {
                 override fun onSuccess(response: Characters) {
                     error.value = false
                     if (response.info.next == null) {
-                        pageNumber = 1
+                        restorePageNumber()
                     }
                     isNextPageAvailable.value = response.info.next != null
                     characters.value = characters.value.orEmpty() +
@@ -87,5 +89,17 @@ class CharactersViewModel : ViewModel() {
                 }
             })
         )
+    }
+
+    private fun incrementPage() {
+        pageNumber += 1
+    }
+
+    private fun restorePageNumber() {
+        pageNumber = FIRST_PAGE
+    }
+
+    companion object {
+        private const val FIRST_PAGE = 1
     }
 }
